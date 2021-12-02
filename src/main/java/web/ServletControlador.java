@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import models.Curso;
+import models.Detalle;
 import repository.CursoDao;
 
 @WebServlet("/ServletControlador")
@@ -31,6 +32,10 @@ public class ServletControlador extends HttpServlet {
                     this.eliminarAlumno(request, response);
                     break;
 
+                case "obtenerDetalle":
+                    this.obtenerDetalle(request, response);
+                    break;
+                    
                 case "editarCurso":
                     this.editarCurso(request, response);
                     break;
@@ -48,6 +53,15 @@ public class ServletControlador extends HttpServlet {
         }
     }
 
+    private void obtenerDetalle(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String codAlumno = request.getParameter("codAlumno");
+        
+        List<Detalle> detalle = new AlumnoDao().obtenerDetalle(codAlumno);
+        
+    }
+    
     private void accionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

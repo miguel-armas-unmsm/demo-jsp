@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import models.Detalle;
 
 public class AlumnoDao {
 
@@ -25,6 +26,14 @@ public class AlumnoDao {
     
     private static final String SQL_DELETE = "DELETE FROM alumnos WHERE codalu=?";
 
+    private static final String SELECT_STUDENT_COURSE = "SELECT \n" +
+      "\tc.codcur as codigo,\n" +
+      "\tc.nomcur as nombre, \n" +
+      "\tac.nota as nota\n" +
+      "\tFROM [dbo].[cursos] as c\n" +
+      "\tJOIN [dbo].[alu_cur] as ac\n" +
+      "\tON c.codcur = ac.codcur\n" +
+      "\tWHERE ac.codalu = ?";
     
     public List<Alumno> listar() {
 
@@ -166,4 +175,32 @@ public class AlumnoDao {
         }
         return rows;
     }
+    
+  public List<Detalle> obtenerDetalle(String codigoAlumno) {
+    List<Detalle> details = new ArrayList<>();
+
+    Connection con = null;
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    
+    try {
+      con = Conexion.getConnection();
+      con.setAutoCommit(false);
+
+      pstm = con.prepareStatement(SELECT_STUDENT_COURSE);
+      pstm.setString(1, codigoAlumno);
+      rs = pstm.executeQuery();
+
+      while (rs.next()) {
+        Detalle detail = new Detalle(rs.getString("codigo"), rs.getString("nombre"), rs.getInt("nota"));
+        details.add(detail);
+      }
+
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+    return details;
+  }
+
+  
 }
