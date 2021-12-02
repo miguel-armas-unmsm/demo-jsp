@@ -39,7 +39,7 @@
                 <tbody>
                     <c:forEach var="detalle" items="${detalles}" varStatus="status">
                         <tr>
-                            <td>${detalle.nombreCurso}</td>
+                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>
