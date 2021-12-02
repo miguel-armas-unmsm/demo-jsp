@@ -22,6 +22,43 @@ public class ClienteDaoJdbc {
         this.clientes.add(clienteTwo);
         this.clientes.add(clienteThree);
     }
+
+    public List<Cliente> listar() {
+        return this.clientes;
+    }
+    
+    public Cliente encontrar(Cliente cliente) {
+        Cliente response = new Cliente();
+        for (Cliente c: this.clientes) {
+            if(cliente.getIdCliente() == c.getIdCliente()) {
+                response = cliente; 
+            }
+        }
+        return response;
+    }
+    
+    public int insertar(Cliente cliente) {
+        this.clientes.add(cliente);
+        return 1;
+    }
+    
+    public int actualizar(Cliente cliente) {
+        Cliente response = cliente;
+        
+        for(Cliente c: this.clientes) {
+            if(c.getIdCliente() == cliente.getIdCliente()) {
+                this.clientes.remove(c);
+            }
+        }
+        this.clientes.add(response);
+        return 1;
+    }
+    
+    public int eliminar (Cliente cliente) {
+        this.clientes.remove(cliente);
+        return 1;
+    }
+    
     
     private static final String SQL_SELECT = "SELECT idCliente, nombre, apellido, email, telefono, saldo"
             + " FROM cliente";
@@ -37,11 +74,6 @@ public class ClienteDaoJdbc {
     
     private static final String SQL_DELETE = "DELETE FROM cliente WHERE idCliente= ?";
 
-    
-    public List<Cliente> listar() {
-        return this.clientes;
-    }
-    
     /*
     public List<Cliente> listar() {
 
@@ -76,19 +108,7 @@ public class ClienteDaoJdbc {
             Conexion.close(con);
         }
         return clientes;
-    }*/
 
-    public Cliente encontrar(Cliente cliente) {
-        Cliente response = new Cliente();
-        for (Cliente c: this.clientes) {
-            if(cliente.getIdCliente() == c.getIdCliente()) {
-                response = cliente; 
-            }
-        }
-        return response;
-    }
-    
-    /*
     public Cliente encontrar(Cliente cliente) {
 
         Connection con = null;
@@ -128,14 +148,7 @@ public class ClienteDaoJdbc {
         }
         return cliente;
     }
-*/
 
-    public int insertar(Cliente cliente) {
-        this.clientes.add(cliente);
-        return 1;
-    }
-    
-    /*
     public int insertar(Cliente cliente) {
         Connection con = null;
         PreparedStatement pstm = null;
@@ -162,21 +175,8 @@ public class ClienteDaoJdbc {
             Conexion.close(con);
         }
         return rows;
-    }*/
-    
-    public int actualizar(Cliente cliente) {
-        Cliente response = cliente;
-        
-        for(Cliente c: this.clientes) {
-            if(c.getIdCliente() == cliente.getIdCliente()) {
-                this.clientes.remove(c);
-            }
-        }
-        this.clientes.add(response);
-        return 1;
     }
     
-    /*
     public int actualizar(Cliente cliente){
         Connection con = null;
         PreparedStatement pstm = null;
@@ -205,15 +205,7 @@ public class ClienteDaoJdbc {
         }
         return rows;
     }
-    */
 
-   
-    public int eliminar (Cliente cliente) {
-        this.clientes.remove(cliente);
-        return 1;
-    }
-    
-    /*
     public int eliminar(Cliente cliente){
         
         Connection con = null;

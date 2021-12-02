@@ -6,9 +6,9 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 public class Conexion {
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/bd_clientes?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "oracle12c";
+    private static final String JDBC_URL = "jdbc:sqlserver://servidorsqlprueba.database.windows.net:1433;databaseName=sqlremoto;";
+    private static final String JDBC_USER = "edinsonb";
+    private static final String JDBC_PASSWORD = "aQ28zB4yL6Bkm5C";
 
     private static BasicDataSource dataSource;
 
