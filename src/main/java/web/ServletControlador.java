@@ -228,10 +228,7 @@ public class ServletControlador extends HttpServlet {
             throws ServletException, IOException {
 
         String codCurso = request.getParameter("codCurso");
-        
-        System.out.println("SERVLET \n");
-        System.out.println(codCurso);
-        
+
         String nombre = request.getParameter("nombre");
         int creditos = 0;
         String creditosString = request.getParameter("creditos");

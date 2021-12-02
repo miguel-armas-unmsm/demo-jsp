@@ -10,6 +10,7 @@ import models.Curso;
 
 public class CursoDao {
     
+    /*
     private List<Curso> cursos;
     
     public CursoDao() {
@@ -24,7 +25,6 @@ public class CursoDao {
         this.cursos.add(cursoThree);
     }
 
-    /*
     public List<Curso> listar() {
         return this.cursos;
     }
@@ -170,10 +170,6 @@ public class CursoDao {
     }
     
     public int actualizar(Curso curso){
-        
-        System.out.println("DAO: \n");
-        System.out.println(curso.getCodigo());
-        
         Connection con = null;
         PreparedStatement pstm = null;
         int rows=0;
