@@ -1,4 +1,4 @@
-<div class="modal fade" id="agregarClienteModal">
+<div class="modal fade" id="agregarCursoModal">
         <div class="modal-dialog modal-lg">
         
         <!-- inicio: MODAL-CONTENEDOR -->

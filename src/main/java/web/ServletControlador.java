@@ -57,11 +57,14 @@ public class ServletControlador extends HttpServlet {
             System.out.println(a);
         }
 
+        List<Curso> cursos = new CursoDao().listar();
+      
         //recupero la session
         HttpSession sesion = request.getSession();
 
         //seteo el atributo alumnos en el alcance session
         sesion.setAttribute("alumnos", alumnos);
+        sesion.setAttribute("cursos", cursos);
 
         //seteo el atributo totalAlumnos en el alcante session
         sesion.setAttribute("totalAlumnos", alumnos.size());
@@ -196,7 +199,7 @@ public class ServletControlador extends HttpServlet {
     private void editarCurso(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String codCurso = request.getParameter("idCliente");
+        String codCurso = request.getParameter("codCurso");
         Curso curso = new CursoDao().encontrar(new Curso(codCurso));
         request.setAttribute("curso", curso);
         String jspEditar = "/WEB-INF/pages/curso/editarCurso.jsp";
@@ -227,7 +230,7 @@ public class ServletControlador extends HttpServlet {
         String codCurso = request.getParameter("codCurso");
         String nombre = request.getParameter("nombre");
         int creditos = 0;
-        String creditosString = request.getParameter("saldo");
+        String creditosString = request.getParameter("creditos");
         if (creditosString != null && !"".equals(creditosString)) {
             creditos = Integer.parseInt(creditosString);
         }

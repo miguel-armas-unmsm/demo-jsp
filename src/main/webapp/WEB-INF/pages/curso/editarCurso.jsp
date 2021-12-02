@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/6edb988eb9.js" crossorigin="anonymous"></script>
 
-        <title>Editar cliente</title>
+        <title>Editar curso</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/pages/comunes/cabecero.jsp"></jsp:include>
@@ -16,7 +16,7 @@
           method="POST" class="was-validated">
 
             <!-- botones de navegación de edicion -->
-            <jsp:include page="/WEB-INF/pages/comunes/botonesNavegacionEdicion.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/pages/comunes/botonesNavegacionEdicionCurso.jsp"></jsp:include>
 
             <sectionl id="details">
                 <div class="container">

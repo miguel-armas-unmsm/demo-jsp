@@ -23,7 +23,7 @@
         <!-- listado de alumnos -->
         <jsp:include page="/WEB-INF/pages/alumno/listadoAlumno.jsp"></jsp:include>
         
-        <!-- listado de clientes -->
+        <jsp:include page="/WEB-INF/pages/comunes/botonesNavegacionCurso.jsp"></jsp:include>
         <jsp:include page="/WEB-INF/pages/curso/listadoCurso.jsp"></jsp:include>
         
         <!-- pie de página-->

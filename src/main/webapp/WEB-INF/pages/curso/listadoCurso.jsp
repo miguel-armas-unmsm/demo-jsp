@@ -25,7 +25,6 @@
                         
                         <tbody>
                             <c:forEach var="curso" items="${cursos}" varStatus="status">
-                                <!-- recorro el objeto clientes pasado como parámetro -->
                                 <tr>
                                     <td>${status.count}</td>
                                     <td>${curso.nombre}</td>
