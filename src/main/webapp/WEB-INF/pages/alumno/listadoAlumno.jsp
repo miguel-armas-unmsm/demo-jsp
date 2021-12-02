@@ -36,6 +36,7 @@
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead> <!-- fin: CABECERO-TABLA -->
                         
@@ -51,6 +52,12 @@
                                         <a href="${pageContext.request.contextPath}/ServletControlador?accion=editarAlumno&codAlumno=${alumno.codAlumno}"
                                             class="btn btn-secondary">
                                             <i class="fas fa-angle-double-right"></i>Editar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/ServletControlador?accion=obtenerDetalle&codAlumno=${alumno.codAlumno}"
+                                            class="btn btn-secondary">
+                                            <i class="fas fa-angle-double-right"></i>Detalle
                                         </a>
                                     </td>
                                 </tr>
