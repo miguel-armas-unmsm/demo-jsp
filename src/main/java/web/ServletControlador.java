@@ -60,6 +60,15 @@ public class ServletControlador extends HttpServlet {
         String codAlumno = request.getParameter("codAlumnoDetalle");
         List<Detalle> detalles = new AlumnoDao().obtenerDetalle(codAlumno);
         request.setAttribute("detalles", detalles);
+        
+        double promedio = 0;
+        for(Detalle d: detalles) {
+            promedio += d.getNota();
+        }
+        promedio = promedio/detalles.size();
+        
+        request.setAttribute("promedio", promedio);
+        
         String jspDetalle = "/WEB-INF/pages/alumno/obtenerDetalle.jsp";
         request.getRequestDispatcher(jspDetalle).forward(request, response);
 

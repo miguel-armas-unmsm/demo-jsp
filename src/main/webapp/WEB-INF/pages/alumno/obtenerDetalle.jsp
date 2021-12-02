@@ -46,6 +46,7 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <h4>Promedio: ${promedio}</h4> 
 
 
         </div>
