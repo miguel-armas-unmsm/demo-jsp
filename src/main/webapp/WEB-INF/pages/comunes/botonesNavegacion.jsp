@@ -11,8 +11,8 @@
                 
                 <!-- inicio: BOTON-AGREGAR -->
                 <a href="#" class="btn btn-primary btn-block"
-                   data-toggle="modal" data-target="#agregarClienteModal">
-                    <i class="fas fa-plus"></i>Agregar cliente
+                   data-toggle="modal" data-target="#agregarAlumnoModal">
+                    <i class="fas fa-plus"></i>Agregar alumno
                 </a>    <!-- fin: BOTON-AGREGAR -->
                 
             </div>  <!-- fin: 3/12-COLUMNAS -->

@@ -18,20 +18,20 @@
             <!-- inicio: 6/12-COLUMNAS -->
             <div class="col-md-3">
 
-                <!-- boton guardar-cliente -->
+                <!-- boton guardar-alumno -->
                 <button type="submit" class="btn btn-success btn-block">
-                    <i class="fas fa-check"></i> Guardar cliente
+                    <i class="fas fa-check"></i> Guardar alumno
                 </button>
             </div>  <!-- fin: 6/12-COLUMNAS -->
             
             <!-- inicio: 9/12-COLUMNAS --->
             <div class="col-md-3">
                 
-                <!-- boton eliminar-cliente -->
+                <!-- boton eliminar-alumno -->
                 <!-- ejecución a través de un link, doGet -->
-                <a href="${pageContext.request.contextPath}/ServletControlador?accion=eliminar&idCliente=${cliente.idCliente}"
+                <a href="${pageContext.request.contextPath}/ServletControlador?accion=eliminar&codAlumno=${alumno.codAlumno}"
                    class="btn btn-danger btn-block">
-                    <i class="fas fa-trash"></i> Eliminar cliente
+                    <i class="fas fa-trash"></i> Eliminar alumno
                 </a>
             </div>
             

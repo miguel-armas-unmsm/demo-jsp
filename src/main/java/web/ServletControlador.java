@@ -23,12 +23,12 @@ public class ServletControlador extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion != null) {
             switch (accion) {
-                case "editar":
-                    this.editarCliente(request, response);
+                case "editarAlumno":
+                    this.editarAlumno(request, response);
                     break;
 
-                case "eliminar":
-                    this.eliminarCliente(request, response);
+                case "eliminarAlumno":
+                    this.eliminarAlumno(request, response);
                     break;
 
                 case "editarCurso":
@@ -51,26 +51,23 @@ public class ServletControlador extends HttpServlet {
     private void accionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //recupero la lista de clientes de la BD
-        List<Alumno> clientes = new AlumnoDao().listar();
-        for (Alumno c : clientes) {
-            System.out.println(c);
+        //recupero la lista de alumnos de la BD
+        List<Alumno> alumnos = new AlumnoDao().listar();
+        for (Alumno a : alumnos) {
+            System.out.println(a);
         }
 
         //recupero la session
         HttpSession sesion = request.getSession();
 
-        //seteo el atributo clientes en el alcance session
-        sesion.setAttribute("clientes", clientes);
+        //seteo el atributo alumnos en el alcance session
+        sesion.setAttribute("alumnos", alumnos);
 
-        //seteo el atributo totalClientes en el alcante session
-        sesion.setAttribute("totalClientes", clientes.size());
-
-        //seteo el atributo saldoTotal en el alcance session
-        sesion.setAttribute("saldoTotal", calcularSaldoTotal(clientes));
+        //seteo el atributo totalAlumnos en el alcante session
+        sesion.setAttribute("totalAlumnos", alumnos.size());
 
         /*
-        request.getRequestDispatcher("clientes.jsp").forward(request, response);
+        request.getRequestDispatcher("alumnos.jsp").forward(request, response);
         
         Nota: forward
         Este método permanece con la información del alcance request, de forma que,
@@ -78,34 +75,25 @@ public class ServletControlador extends HttpServlet {
         esto, utilizaremos el alcance session en lugar de request y redireccionaremos
         mediante .sendRedirect
          */
-        response.sendRedirect("clientes.jsp");
-    }
-
-    private double calcularSaldoTotal(List<Alumno> clientes) {
-
-        double total = 0;
-        for (Alumno c : clientes) {
-            total += c.getSaldo();
-        }
-        return total;
+        response.sendRedirect("alumnos.jsp");
     }
 
     /**
-     * Recupera el idCliente
+     * Recupera el codAlumno
      */
-    private void editarCliente(HttpServletRequest request, HttpServletResponse response)
+    private void editarAlumno(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //recupero el idCliente
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+        //recupero el codAlumno
+        String codAlumno = request.getParameter("codAlumno");
 
-        //recupero el objeto cliente de la BD a partir del idCliente
-        Alumno cliente = new AlumnoDao().encontrar(new Alumno(idCliente));
+        //recupero el objeto alumno de la BD a partir del codAlumno
+        Alumno alumno = new AlumnoDao().encontrar(new Alumno(codAlumno));
 
-        //envío el objeto cliente al alcance request
-        request.setAttribute("cliente", cliente);
+        //envío el objeto alumno al alcance request
+        request.setAttribute("alumno", alumno);
 
-        String jspEditar = "/WEB-INF/pages/cliente/editarCliente.jsp";
+        String jspEditar = "/WEB-INF/pages/alumno/editarAlumno.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
 
     }
@@ -120,12 +108,12 @@ public class ServletControlador extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion != null) {
             switch (accion) {
-                case "insertar":
-                    this.insertarCliente(request, response);
+                case "insertarAlumno":
+                    this.insertarAlumno(request, response);
                     break;
 
-                case "modificar":
-                    this.modificarCliente(request, response);
+                case "modificarAlumno":
+                    this.modificarAlumno(request, response);
                     break;
 
                 case "insertarCurso":
@@ -145,69 +133,54 @@ public class ServletControlador extends HttpServlet {
         }
     }
 
-    private void insertarCliente(HttpServletRequest request, HttpServletResponse response)
+    private void insertarAlumno(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //recupero valores del formulario agregarCliente
+        //recupero valores del formulario agregarAlumno
         String nombre = request.getParameter("nombre");
-        String apeliido = request.getParameter("apellido");
-        String email = request.getParameter("email");
-        String telefono = request.getParameter("telefono");
-        double saldo = 0;
-        String saldoString = request.getParameter("saldo");
-        if (saldoString != null && !"".equals(saldoString)) {
-            saldo = Double.parseDouble(saldoString);
-        }
+        String apellido = request.getParameter("apellido");        
 
-        //creo el objeto modelo cliente
-        Alumno cliente = new Alumno(nombre, apeliido, email, telefono, saldo);
+        //creo el objeto modelo alumno
+        Alumno alumno = new Alumno(nombre, apellido);
 
         //inserto el nuevo objeto en la BD
-        int registrosModificados = new AlumnoDao().insertar(cliente);
+        int registrosModificados = new AlumnoDao().insertar(alumno);
         this.accionDefault(request, response);
     }
-    
-    private void modificarCliente(HttpServletRequest request, HttpServletResponse response)
+
+    private void modificarAlumno(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         /*
-        el parámetro idCliente no es visible en el formulario, sino que ha sido enviado
+        el parámetro codAlumno no es visible en el formulario, sino que ha sido enviado
         como parámetro POST.
          */
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
-
+        String codAlumno = request.getParameter("codAlumno");
         String nombre = request.getParameter("nombre");
-        String apeliido = request.getParameter("apellido");
-        String email = request.getParameter("email");
-        String telefono = request.getParameter("telefono");
-        double saldo = 0;
-        String saldoString = request.getParameter("saldo");
-        if (saldoString != null && !"".equals(saldoString)) {
-            saldo = Double.parseDouble(saldoString);
-        }
+        String apellido = request.getParameter("apellido");
 
-        //creo el objeto modelo cliente
-        Alumno cliente = new Alumno(idCliente, nombre, apeliido, email, telefono, saldo);
+        //creo el objeto modelo alumno
+        Alumno alumno = new Alumno(codAlumno, nombre, apellido);
 
         //modifico el objeto en la BD
-        int registrosModificados = new AlumnoDao().actualizar(cliente);
+        int registrosModificados = new AlumnoDao().actualizar(alumno);
         this.accionDefault(request, response);
     }
 
-    private void eliminarCliente(HttpServletRequest request, HttpServletResponse response)
+    private void eliminarAlumno(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         /*
-        el parámetro idCliente no es visible en el formulario, sino que ha sido enviado
+        el parámetro codAlumno no es visible en el formulario, sino que ha sido enviado
         como parámetro POST.
          */
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+        String codAlumno = request.getParameter("codAlumno");
 
-        //creo el objeto modelo cliente
-        Alumno cliente = new Alumno(idCliente);
+        //creo el objeto modelo alumno
+        Alumno alumno = new Alumno(codAlumno);
 
         //modifico el objeto en la BD
-        int registrosModificados = new AlumnoDao().eliminar(cliente);
+        int registrosModificados = new AlumnoDao().eliminar(alumno);
         this.accionDefault(request, response);
     }
     

@@ -11,7 +11,7 @@
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/6edb988eb9.js" crossorigin="anonymous"></script>
         
-        <title>Control de clientes</title>
+        <title>Control de alumnos</title>
     </head>
     <body>
         <!-- cabecero -->
@@ -20,8 +20,8 @@
         <!-- botones de navegación -->
         <jsp:include page="/WEB-INF/pages/comunes/botonesNavegacion.jsp"></jsp:include>
         
-        <!-- listado de clientes -->
-        <jsp:include page="/WEB-INF/pages/cliente/listadoCliente.jsp"></jsp:include>
+        <!-- listado de alumnos -->
+        <jsp:include page="/WEB-INF/pages/alumno/listadoAlumno.jsp"></jsp:include>
         
         <!-- listado de clientes -->
         <jsp:include page="/WEB-INF/pages/curso/listadoCurso.jsp"></jsp:include>

@@ -10,52 +10,52 @@ import java.util.List;
 
 public class AlumnoDao {
 
-    private List<Alumno> clientes;
+    private List<Alumno> alumnos;
     
     public AlumnoDao() {
-        clientes = new ArrayList<>();
+        alumnos = new ArrayList<>();
         
-        Alumno clienteOne = new Alumno(1, "Miguel Rodrigo", "Armas Abt", "miguel.armas@unmsm.edu.pe", "938817123", 23000);
-        Alumno clienteTwo = new Alumno(2, "Edinson Paolo", "Boada Cajo", "edinson.boada@unmsm.edu.pe", "938817123", 23000); 
-        Alumno clienteThree = new Alumno(3, "Yanpieer Josue", "Romero Salazar", "yanpieer.romero@unmsm.edu.pe", "938817123", 23000);  
-        this.clientes.add(clienteOne);
-        this.clientes.add(clienteTwo);
-        this.clientes.add(clienteThree);
+        Alumno alumnoOne = new Alumno("A0001", "Miguel Rodrigo", "Armas Abt");
+        Alumno alumnoTwo = new Alumno("A0002", "Edinson Paolo", "Boada Cajo"); 
+        Alumno alumnoThree = new Alumno("A0003", "Yanpieer Josue", "Romero Salazar");
+        this.alumnos.add(alumnoOne);
+        this.alumnos.add(alumnoTwo);
+        this.alumnos.add(alumnoThree);
     }
 
     public List<Alumno> listar() {
-        return this.clientes;
+        return this.alumnos;
     }
     
-    public Alumno encontrar(Alumno cliente) {
+    public Alumno encontrar(Alumno alumno) {
         Alumno response = new Alumno();
-        for (Alumno c: this.clientes) {
-            if(cliente.getIdCliente() == c.getIdCliente()) {
-                response = cliente; 
+        for (Alumno a: this.alumnos) {
+            if(alumno.getCodAlumno()== a.getCodAlumno()) {
+                response = alumno; 
             }
         }
         return response;
     }
     
-    public int insertar(Alumno cliente) {
-        this.clientes.add(cliente);
+    public int insertar(Alumno alumno) {
+        this.alumnos.add(alumno);
         return 1;
     }
     
-    public int actualizar(Alumno cliente) {
-        Alumno response = cliente;
+    public int actualizar(Alumno alumno) {
+        Alumno response = alumno;
         
-        for(Alumno c: this.clientes) {
-            if(c.getIdCliente() == cliente.getIdCliente()) {
-                this.clientes.remove(c);
+        for(Alumno a: this.alumnos) {
+            if(a.getCodAlumno()== alumno.getCodAlumno()) {
+                this.alumnos.remove(a);
             }
         }
-        this.clientes.add(response);
+        this.alumnos.add(response);
         return 1;
     }
     
-    public int eliminar (Alumno cliente) {
-        this.clientes.remove(cliente);
+    public int eliminar (Alumno alumno) {
+        this.alumnos.remove(alumno);
         return 1;
     }
     
@@ -80,7 +80,7 @@ public class AlumnoDao {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        List<Cliente> clientes = new ArrayList<>();
+        List<Cliente> alumnos = new ArrayList<>();
 
         try {
             con = Conexion.getConnection();
@@ -97,7 +97,7 @@ public class AlumnoDao {
                 double saldo = rs.getDouble("saldo");
 
                 Cliente ret = new Cliente(idCliente, nombre, apellido, email, telefono, saldo);
-                clientes.add(ret);
+                alumnos.add(ret);
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -107,7 +107,7 @@ public class AlumnoDao {
             Conexion.close(pstm);
             Conexion.close(con);
         }
-        return clientes;
+        return alumnos;
 
     public Cliente encontrar(Cliente cliente) {
 

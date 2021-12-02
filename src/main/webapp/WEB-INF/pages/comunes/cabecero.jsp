@@ -10,7 +10,7 @@
             <div class="col-md-6">
                 <h1>
                     <!-- ícono -->
-                    <i class="fas fa-cog"></i> Control de clientes
+                    <i class="fas fa-cog"></i> Control de alumnos
                 </h1>
             </div>  <!-- fin: 6/12-COLUMNAS -->
         </div>  <!-- fin: FILA -->

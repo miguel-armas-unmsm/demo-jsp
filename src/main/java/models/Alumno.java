@@ -2,42 +2,33 @@ package models;
 
 public class Alumno {
     
-    private int idCliente;
+    private String codAlumno;
     private String nombre;
     private String apellido;
-    private String email;
-    private String telefono;
-    private double saldo;
     
     public Alumno(){}
 
-    public Alumno(int idCliente) {
-        this.idCliente = idCliente;
+    public Alumno(String codigo) {
+        this.codAlumno = codigo;
     }
 
-    public Alumno(String nombre, String apellido, String email, String telefono, double saldo) {
+    public Alumno(String nombre, String apellido) {        
         this.nombre = nombre;
         this.apellido = apellido;
-        this.email = email;
-        this.telefono = telefono;
-        this.saldo = saldo;
-    }
+    }    
 
-    public Alumno(int idCliente, String nombre, String apellido, String email, String telefono, double saldo) {
-        this.idCliente = idCliente;
+    public Alumno(String codigo, String nombre, String apellido) {
+        this.codAlumno = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.email = email;
-        this.telefono = telefono;
-        this.saldo = saldo;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public String getCodAlumno() {
+        return codAlumno;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setCodAlumno(String codAlumno) {
+        this.codAlumno = codAlumno;
     }
 
     public String getNombre() {
@@ -55,35 +46,9 @@ public class Alumno {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
+    
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", telefono=" + telefono + ", saldo=" + saldo + '}';
+        return "Alumno{" + "codigo=" + codAlumno + ", nombre=" + nombre + ", apellido=" + apellido + '}';
     }
-    
-    
 }

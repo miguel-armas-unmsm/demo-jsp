@@ -11,14 +11,14 @@
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/6edb988eb9.js" crossorigin="anonymous"></script>
 
-        <title>Editar cliente</title>
+        <title>Editar alumno</title>
     </head>
     <body>
         <!-- cabecero -->
         <jsp:include page="/WEB-INF/pages/comunes/cabecero.jsp"></jsp:include>
 
         <!-- inicio: FORMULARIO -->
-        <form action="${pageContext.request.contextPath}/ServletControlador?accion=modificar&idCliente=${cliente.idCliente}"
+        <form action="${pageContext.request.contextPath}/ServletControlador?accion=modificar&codAlumno=${alumno.codAlumno}"
           method="POST" class="was-validated">
 
             <!-- botones de navegación de edicion -->
@@ -32,40 +32,21 @@
                                 
                                 <!-- cabecero de tarjeta --> 
                                 <div class="card-header">
-                                    <h4>Editar cliente</h4>
+                                    <h4>Editar alumno</h4>
                                 </div>
                                 
                                 <!-- cuerpo de tarjeta -->
                                 <!-- nombre -->
                                  <div class="form-group">
                                      <label for="nombre">Nombre</label>
-                                     <input type="text" class="form-control" name="nombre" required value="${cliente.nombre}">
+                                     <input type="text" class="form-control" name="nombre" required value="${alumno.nombre}">
                                  </div>
 
                                  <!-- apellido -->
                                  <div class="form-group">
                                      <label for="apellido">Apellido</label>
-                                     <input type="text" class="form-control" name="apellido" required value="${cliente.apellido}">
-                                 </div>
-
-                                 <!-- email -->
-                                 <div class="form-group">
-                                     <label for="email">Email</label>
-                                     <input type="email" class="form-control" name="email" required value="${cliente.email}">
-                                 </div>
-
-                                 <!-- telefono -->
-                                 <div class="form-group">
-                                     <label for="telefono">Telefono</label>
-                                     <input type="tel" class="form-control" name="telefono" required value="${cliente.telefono}">
-                                 </div>
-
-                                 <!-- saldo -->
-                                 <div class="form-group">
-                                     <label for="saldo">Saldo</label>
-                                     <input type="number" class="form-control" name="saldo" required value="${cliente.saldo}" step="any"> <!-- step="any" acepta valores decimales -->
-                                 </div>
-
+                                     <input type="text" class="form-control" name="apellido" required value="${alumno.apellido}">
+                                 </div>                                
                             </div>
                         </div>
                     </div>

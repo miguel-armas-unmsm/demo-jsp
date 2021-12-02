@@ -1,5 +1,5 @@
 <!-- inicio: MODAL -->
-<div class="modal fade" id="agregarClienteModal">
+<div class="modal fade" id="agregarAlumnoModal">
     
     <!-- inicio: MODAL-DIALOGO -->
     <div class="modal-dialog modal-lg">
@@ -10,7 +10,7 @@
             <!-- inicio: MODAL-HEADER -->
             <div class="modal-header bg-info text-white">
                 <!-- titulo -->
-                <h5 class="modal-title">Agregar cliente</h5>
+                <h5 class="modal-title">Agregar alumno</h5>
                 
                 <!-- boton-close -->
                 <button class="close" data-dismiss="modal">
@@ -35,26 +35,7 @@
                     <div class="form-group">
                         <label for="apellido">Apellido</label>
                         <input type="text" class="form-control" name="apellido" required>
-                    </div>
-                    
-                    <!-- email -->
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" required>
-                    </div>
-                    
-                    <!-- telefono -->
-                    <div class="form-group">
-                        <label for="telefono">Telefono</label>
-                        <input type="tel" class="form-control" name="telefono" required>
-                    </div>
-                    
-                    <!-- saldo -->
-                    <div class="form-group">
-                        <label for="saldo">Saldo</label>
-                        <input type="number" class="form-control" name="saldo" required step="any"> <!-- step="any" acepta valores decimales -->
-                    </div>
-                    
+                    </div>                                        
                 </div>  <!-- fin: MODAL-BODY -->
             
                 <!-- inicio: MODAL-FOOTER -->
