@@ -218,7 +218,7 @@ public class ServletControlador extends HttpServlet {
             creditos = Integer.parseInt(creditosString);
         }
 
-        Curso curso = new Curso(nombre, codigo, creditos);
+        Curso curso = new Curso(codigo, nombre, creditos);
 
         int registrosModificados = new CursoDao().insertar(curso);
         this.accionDefault(request, response);
@@ -228,6 +228,10 @@ public class ServletControlador extends HttpServlet {
             throws ServletException, IOException {
 
         String codCurso = request.getParameter("codCurso");
+        
+        System.out.println("SERVLET \n");
+        System.out.println(codCurso);
+        
         String nombre = request.getParameter("nombre");
         int creditos = 0;
         String creditosString = request.getParameter("creditos");

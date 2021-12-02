@@ -28,8 +28,7 @@ public class CursoDao {
     public List<Curso> listar() {
         return this.cursos;
     }
-    */
-    
+
     public Curso encontrar(Curso curso) {
         Curso response = new Curso();
         for (Curso c: this.cursos) {
@@ -39,11 +38,12 @@ public class CursoDao {
         }
         return response;
     }
-    
+
     public int insertar(Curso curso) {
         this.cursos.add(curso);
         return 1;
     }
+    
     
     public int actualizar(Curso curso) {
         Curso response = curso;
@@ -61,21 +61,21 @@ public class CursoDao {
         this.cursos.remove(curso);
         return 1;
     }
+    */
     
     private static final String SQL_SELECT = "SELECT codcur, nomcur, credito"
             + " FROM dbo.cursos";
 
-    private static final String SQL_SELECT_BY_ID = "SELECT idCliente, nombre, apellido, email, telefono, saldo"
-            + " FROM cliente WHERE idCliente= ?";
+    private static final String SQL_SELECT_BY_CODE = "SELECT codcur, nomcur, credito"
+            + " FROM dbo.cursos WHERE codcur= ?";
 
-    private static final String SQL_INSERT = "INSERT INTO cliente (nombre, apellido, email, telefono, saldo) "
-            + "VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO dbo.cursos (codcur, nomcur, credito) "
+            + "VALUES (?, ?, ?)";
 
-    private static final String SQL_UPDATE = "UPDATE cliente "
-            + "SET nombre=?, apellido=?, email=?, telefono=?, saldo=? WHERE idCliente=?";
+    private static final String SQL_UPDATE = "UPDATE dbo.cursos "
+            + "SET nomcur=?, credito=? WHERE codcur=?";
     
-    private static final String SQL_DELETE = "DELETE FROM cliente WHERE idCliente= ?";
-
+    private static final String SQL_DELETE = "DELETE FROM dbo.cursos WHERE codcur= ?";
 
     public List<Curso> listar() {
 
@@ -108,8 +108,7 @@ public class CursoDao {
         return cursos;
     }
 
-    /*
-    public Cliente encontrar(Cliente cliente) {
+    public Curso encontrar(Curso curso) {
 
         Connection con = null;
         PreparedStatement pstm = null;
@@ -117,25 +116,22 @@ public class CursoDao {
         try {
 
             con = Conexion.getConnection();
-            pstm = con.prepareStatement(SQL_SELECT_BY_ID);
+            pstm = con.prepareStatement(SQL_SELECT_BY_CODE);
 
             //proporciono el primer parámetro entero
-            pstm.setInt(1, cliente.getIdCliente());
+            pstm.setString(1, curso.getCodigo());
             rs = pstm.executeQuery();
 
             //me posiciono en el registro devuelto, de haberlo
-            rs.absolute(1);
-            String nombre = rs.getString("nombre");
-            String apellido = rs.getString("apellido");
-            String email = rs.getString("email");
-            String telefono = rs.getString("telefono");
-            double saldo = rs.getDouble("saldo");
+            if(rs.next()) {
+                String codigo = rs.getString("codcur");
+                String nombre = rs.getString("nomcur");
+                int creditos = rs.getInt("credito");
 
-            cliente.setNombre(nombre);
-            cliente.setApellido(apellido);
-            cliente.setEmail(email);
-            cliente.setTelefono(telefono);
-            cliente.setSaldo(saldo);
+                curso.setCodigo(codigo);
+                curso.setNombre(nombre);
+                curso.setCreditos(creditos);
+            }
 
         } catch (Exception ex) {
 
@@ -146,25 +142,21 @@ public class CursoDao {
             Conexion.close(pstm);
             Conexion.close(con);
         }
-        return cliente;
+        return curso;
     }
 
-    public int insertar(Cliente cliente) {
+    public int insertar(Curso curso) {
         Connection con = null;
         PreparedStatement pstm = null;
         int rows=0;
         
         try {
-
             con = Conexion.getConnection();
             pstm = con.prepareStatement(SQL_INSERT);
-            pstm.setString(1, cliente.getNombre());
-            pstm.setString(2, cliente.getApellido());
-            pstm.setString(3, cliente.getEmail());
-            pstm.setString(4, cliente.getTelefono());
-            pstm.setDouble(5, cliente.getSaldo());
+            pstm.setString(1, curso.getCodigo());
+            pstm.setString(2, curso.getNombre());
+            pstm.setInt(3, curso.getCreditos());
             
-            //filas afectadas
             rows=pstm.executeUpdate();
         } catch (SQLException ex) {
 
@@ -177,23 +169,22 @@ public class CursoDao {
         return rows;
     }
     
-    public int actualizar(Cliente cliente){
+    public int actualizar(Curso curso){
+        
+        System.out.println("DAO: \n");
+        System.out.println(curso.getCodigo());
+        
         Connection con = null;
         PreparedStatement pstm = null;
         int rows=0;
         
         try {
-
             con = Conexion.getConnection();
             pstm = con.prepareStatement(SQL_UPDATE);
-            pstm.setString(1, cliente.getNombre());
-            pstm.setString(2, cliente.getApellido());
-            pstm.setString(3, cliente.getEmail());
-            pstm.setString(4, cliente.getTelefono());
-            pstm.setDouble(5, cliente.getSaldo());
-            pstm.setInt(6, cliente.getIdCliente());
+            pstm.setString(1, curso.getNombre());
+            pstm.setInt(2, curso.getCreditos());
+            pstm.setString(3, curso.getCodigo());
             
-            //filas afectadas
             rows=pstm.executeUpdate();
         } catch (SQLException ex) {
 
@@ -206,7 +197,8 @@ public class CursoDao {
         return rows;
     }
 
-    public int eliminar(Cliente cliente){
+    
+    public int eliminar(Curso curso){
         
         Connection con = null;
         PreparedStatement pstm = null;
@@ -216,9 +208,8 @@ public class CursoDao {
 
             con = Conexion.getConnection();
             pstm = con.prepareStatement(SQL_DELETE);
-            pstm.setInt(1, cliente.getIdCliente());
+            pstm.setString(1, curso.getCodigo());
             
-            //filas afectadas
             rows=pstm.executeUpdate();
         } catch (SQLException ex) {
 
@@ -230,6 +221,5 @@ public class CursoDao {
         }
         return rows;
     }
-    */
 
 }
