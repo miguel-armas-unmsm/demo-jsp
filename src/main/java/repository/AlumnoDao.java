@@ -199,9 +199,10 @@ public class AlumnoDao {
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     }
-    
-    System.out.println("DETALLE");
+
+    System.out.println("DETALLE OBTENIDO");
     System.out.println(details);
+    
     return details;
   }
 

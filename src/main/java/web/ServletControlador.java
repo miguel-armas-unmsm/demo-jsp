@@ -3,6 +3,7 @@ package web;
 import repository.AlumnoDao;
 import models.Alumno;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,16 +57,17 @@ public class ServletControlador extends HttpServlet {
     private void obtenerDetalle(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String codAlumno = request.getParameter("codAlumno");
-        
+        String codAlumno = request.getParameter("codAlumnoDetalle");
         List<Detalle> detalles = new AlumnoDao().obtenerDetalle(codAlumno);
-        
-        HttpSession sesion = request.getSession();
-        sesion.setAttribute("detalles", detalles);
+        request.setAttribute("detalles", detalles);
+        String jspDetalle = "/WEB-INF/pages/alumno/obtenerDetalle.jsp";
+        request.getRequestDispatcher(jspDetalle).forward(request, response);
+
     }
     
     private void accionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
 
         //recupero la lista de alumnos de la BD
         List<Alumno> alumnos = new AlumnoDao().listar();
@@ -81,7 +83,7 @@ public class ServletControlador extends HttpServlet {
         //seteo el atributo alumnos en el alcance session
         sesion.setAttribute("alumnos", alumnos);
         sesion.setAttribute("cursos", cursos);
-
+        
         //seteo el atributo totalAlumnos en el alcante session
         sesion.setAttribute("totalAlumnos", alumnos.size());
 
