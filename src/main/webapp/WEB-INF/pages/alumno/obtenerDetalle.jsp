@@ -39,9 +39,9 @@
                 <tbody>
                     <c:forEach var="detalle" items="${detalles}" varStatus="status">
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>${detalle.codigo}</td>
+                            <td>${detalle.nombreCurso}</td>
+                            <td>${detalle.nota}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
