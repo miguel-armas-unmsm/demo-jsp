@@ -1,6 +1,6 @@
-package capa_datos;
+package repository;
 
-import dominio.Cliente;
+import models.Alumno;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,28 +8,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDaoJdbc {
+public class AlumnoDao {
 
-    private List<Cliente> clientes;
+    private List<Alumno> clientes;
     
-    public ClienteDaoJdbc() {
+    public AlumnoDao() {
         clientes = new ArrayList<>();
         
-        Cliente clienteOne = new Cliente(1, "Miguel Rodrigo", "Armas Abt", "miguel.armas@unmsm.edu.pe", "938817123", 23000);
-        Cliente clienteTwo = new Cliente(2, "Edinson Paolo", "Boada Cajo", "edinson.boada@unmsm.edu.pe", "938817123", 23000); 
-        Cliente clienteThree = new Cliente(3, "Yanpieer Josue", "Romero Salazar", "yanpieer.romero@unmsm.edu.pe", "938817123", 23000);  
+        Alumno clienteOne = new Alumno(1, "Miguel Rodrigo", "Armas Abt", "miguel.armas@unmsm.edu.pe", "938817123", 23000);
+        Alumno clienteTwo = new Alumno(2, "Edinson Paolo", "Boada Cajo", "edinson.boada@unmsm.edu.pe", "938817123", 23000); 
+        Alumno clienteThree = new Alumno(3, "Yanpieer Josue", "Romero Salazar", "yanpieer.romero@unmsm.edu.pe", "938817123", 23000);  
         this.clientes.add(clienteOne);
         this.clientes.add(clienteTwo);
         this.clientes.add(clienteThree);
     }
 
-    public List<Cliente> listar() {
+    public List<Alumno> listar() {
         return this.clientes;
     }
     
-    public Cliente encontrar(Cliente cliente) {
-        Cliente response = new Cliente();
-        for (Cliente c: this.clientes) {
+    public Alumno encontrar(Alumno cliente) {
+        Alumno response = new Alumno();
+        for (Alumno c: this.clientes) {
             if(cliente.getIdCliente() == c.getIdCliente()) {
                 response = cliente; 
             }
@@ -37,15 +37,15 @@ public class ClienteDaoJdbc {
         return response;
     }
     
-    public int insertar(Cliente cliente) {
+    public int insertar(Alumno cliente) {
         this.clientes.add(cliente);
         return 1;
     }
     
-    public int actualizar(Cliente cliente) {
-        Cliente response = cliente;
+    public int actualizar(Alumno cliente) {
+        Alumno response = cliente;
         
-        for(Cliente c: this.clientes) {
+        for(Alumno c: this.clientes) {
             if(c.getIdCliente() == cliente.getIdCliente()) {
                 this.clientes.remove(c);
             }
@@ -54,7 +54,7 @@ public class ClienteDaoJdbc {
         return 1;
     }
     
-    public int eliminar (Cliente cliente) {
+    public int eliminar (Alumno cliente) {
         this.clientes.remove(cliente);
         return 1;
     }

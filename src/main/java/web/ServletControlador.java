@@ -1,7 +1,7 @@
 package web;
 
-import capa_datos.ClienteDaoJdbc;
-import dominio.Cliente;
+import repository.AlumnoDao;
+import models.Alumno;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -42,8 +42,8 @@ public class ServletControlador extends HttpServlet {
             throws ServletException, IOException {
 
         //recupero la lista de clientes de la BD
-        List<Cliente> clientes = new ClienteDaoJdbc().listar();
-        for (Cliente c : clientes) {
+        List<Alumno> clientes = new AlumnoDao().listar();
+        for (Alumno c : clientes) {
             System.out.println(c);
         }
 
@@ -71,10 +71,10 @@ public class ServletControlador extends HttpServlet {
         response.sendRedirect("clientes.jsp");
     }
 
-    private double calcularSaldoTotal(List<Cliente> clientes) {
+    private double calcularSaldoTotal(List<Alumno> clientes) {
 
         double total = 0;
-        for (Cliente c : clientes) {
+        for (Alumno c : clientes) {
             total += c.getSaldo();
         }
         return total;
@@ -90,7 +90,7 @@ public class ServletControlador extends HttpServlet {
         int idCliente = Integer.parseInt(request.getParameter("idCliente"));
 
         //recupero el objeto cliente de la BD a partir del idCliente
-        Cliente cliente = new ClienteDaoJdbc().encontrar(new Cliente(idCliente));
+        Alumno cliente = new AlumnoDao().encontrar(new Alumno(idCliente));
 
         //envío el objeto cliente al alcance request
         request.setAttribute("cliente", cliente);
@@ -142,10 +142,10 @@ public class ServletControlador extends HttpServlet {
         }
 
         //creo el objeto modelo cliente
-        Cliente cliente = new Cliente(nombre, apeliido, email, telefono, saldo);
+        Alumno cliente = new Alumno(nombre, apeliido, email, telefono, saldo);
 
         //inserto el nuevo objeto en la BD
-        int registrosModificados = new ClienteDaoJdbc().insertar(cliente);
+        int registrosModificados = new AlumnoDao().insertar(cliente);
         this.accionDefault(request, response);
     }
 
@@ -169,10 +169,10 @@ public class ServletControlador extends HttpServlet {
         }
 
         //creo el objeto modelo cliente
-        Cliente cliente = new Cliente(idCliente, nombre, apeliido, email, telefono, saldo);
+        Alumno cliente = new Alumno(idCliente, nombre, apeliido, email, telefono, saldo);
 
         //modifico el objeto en la BD
-        int registrosModificados = new ClienteDaoJdbc().actualizar(cliente);
+        int registrosModificados = new AlumnoDao().actualizar(cliente);
         this.accionDefault(request, response);
     }
 
@@ -186,10 +186,10 @@ public class ServletControlador extends HttpServlet {
         int idCliente = Integer.parseInt(request.getParameter("idCliente"));
 
         //creo el objeto modelo cliente
-        Cliente cliente = new Cliente(idCliente);
+        Alumno cliente = new Alumno(idCliente);
 
         //modifico el objeto en la BD
-        int registrosModificados = new ClienteDaoJdbc().eliminar(cliente);
+        int registrosModificados = new AlumnoDao().eliminar(cliente);
         this.accionDefault(request, response);
     }
 }

@@ -1,6 +1,6 @@
-package dominio;
+package models;
 
-public class Cliente {
+public class Alumno {
     
     private int idCliente;
     private String nombre;
@@ -9,13 +9,13 @@ public class Cliente {
     private String telefono;
     private double saldo;
     
-    public Cliente(){}
+    public Alumno(){}
 
-    public Cliente(int idCliente) {
+    public Alumno(int idCliente) {
         this.idCliente = idCliente;
     }
 
-    public Cliente(String nombre, String apellido, String email, String telefono, double saldo) {
+    public Alumno(String nombre, String apellido, String email, String telefono, double saldo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -23,7 +23,7 @@ public class Cliente {
         this.saldo = saldo;
     }
 
-    public Cliente(int idCliente, String nombre, String apellido, String email, String telefono, double saldo) {
+    public Alumno(int idCliente, String nombre, String apellido, String email, String telefono, double saldo) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;

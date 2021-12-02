@@ -1,4 +1,4 @@
-package capa_datos;
+package repository;
 
 import java.sql.*;
 import javax.sql.DataSource;
