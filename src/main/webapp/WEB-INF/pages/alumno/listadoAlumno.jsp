@@ -56,7 +56,8 @@
                                     </td>
                                     <td>
                                         <a href="${pageContext.request.contextPath}/ServletControlador?accion=obtenerDetalle&codAlumno=${alumno.codAlumno}"
-                                            class="btn btn-secondary">
+                                           class="btn btn-secondary"
+                                           data-toggle="modal" data-target="#obtenerDetalleModal">
                                             <i class="fas fa-angle-double-right"></i>Detalle
                                         </a>
                                     </td>
@@ -78,3 +79,4 @@
                         
 <!-- Agregar alumno MODAL -->
 <jsp:include page="/WEB-INF/pages/alumno/agregarAlumno.jsp"/>
+<jsp:include page="/WEB-INF/pages/alumno/detalleModal.jsp"/>

@@ -16,6 +16,10 @@ public class Detalle {
 
     public Detalle() {
     }
-  
-  
+
+    @Override
+    public String toString() {
+        return "Detalle{" + "codigo=" + codigo + ", nombreCurso=" + nombreCurso + ", nota=" + nota + '}';
+    }
+
 }

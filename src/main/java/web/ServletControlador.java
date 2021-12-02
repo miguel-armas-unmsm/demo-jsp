@@ -58,11 +58,10 @@ public class ServletControlador extends HttpServlet {
         
         String codAlumno = request.getParameter("codAlumno");
         
-        List<Detalle> detalle = new AlumnoDao().obtenerDetalle(codAlumno);
+        List<Detalle> detalles = new AlumnoDao().obtenerDetalle(codAlumno);
         
         HttpSession sesion = request.getSession();
-        sesion.setAttribute("detalle", detalle);
-        response.sendRedirect("alumnos.jsp");
+        sesion.setAttribute("detalles", detalles);
     }
     
     private void accionDefault(HttpServletRequest request, HttpServletResponse response)
