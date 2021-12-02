@@ -76,7 +76,8 @@
     </div>  <!-- fin: CONTAINER -->
     
 </section>
-                        
+
+
 <!-- Agregar alumno MODAL -->
 <jsp:include page="/WEB-INF/pages/alumno/agregarAlumno.jsp"/>
 <jsp:include page="/WEB-INF/pages/alumno/detalleModal.jsp"/>
