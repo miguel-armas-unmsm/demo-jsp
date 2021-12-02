@@ -23,6 +23,9 @@
         <!-- listado de clientes -->
         <jsp:include page="/WEB-INF/pages/cliente/listadoCliente.jsp"></jsp:include>
         
+        <!-- listado de clientes -->
+        <jsp:include page="/WEB-INF/pages/curso/listadoCurso.jsp"></jsp:include>
+        
         <!-- pie de página-->
         <jsp:include page="/WEB-INF/pages/comunes/piePagina.jsp"></jsp:include>
 

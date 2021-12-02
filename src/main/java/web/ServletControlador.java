@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import models.Curso;
+import repository.CursoDao;
 
 @WebServlet("/ServletControlador")
 public class ServletControlador extends HttpServlet {
@@ -29,6 +31,14 @@ public class ServletControlador extends HttpServlet {
                     this.eliminarCliente(request, response);
                     break;
 
+                case "editarCurso":
+                    this.editarCurso(request, response);
+                    break;
+                    
+                case "eliminarCurso":
+                    this.eliminarCurso(request, response);
+                    break;
+                    
                 default:
                     //no se proporcionó un valor válido
                     this.accionDefault(request, response);
@@ -118,6 +128,14 @@ public class ServletControlador extends HttpServlet {
                     this.modificarCliente(request, response);
                     break;
 
+                case "insertarCurso":
+                    this.insertarCurso(request, response);
+                    break;
+
+                case "modificarCurso":
+                    this.modificarCurso(request, response);
+                    break;
+                    
                 default:
                     //no se proporcionó un valor válido
                     this.accionDefault(request, response);
@@ -148,7 +166,7 @@ public class ServletControlador extends HttpServlet {
         int registrosModificados = new AlumnoDao().insertar(cliente);
         this.accionDefault(request, response);
     }
-
+    
     private void modificarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -192,4 +210,58 @@ public class ServletControlador extends HttpServlet {
         int registrosModificados = new AlumnoDao().eliminar(cliente);
         this.accionDefault(request, response);
     }
+    
+    private void eliminarCurso(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String codCurso = request.getParameter("codCurso");
+        Curso curso = new Curso(codCurso);
+        int registrosModificados = new CursoDao().eliminar(curso);
+        this.accionDefault(request, response);
+    }
+    
+    private void editarCurso(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String codCurso = request.getParameter("idCliente");
+        Curso curso = new CursoDao().encontrar(new Curso(codCurso));
+        request.setAttribute("curso", curso);
+        String jspEditar = "/WEB-INF/pages/curso/editarCurso.jsp";
+        request.getRequestDispatcher(jspEditar).forward(request, response);
+    }
+    
+    private void insertarCurso(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String codigo = request.getParameter("codigo");
+        String nombre = request.getParameter("nombre");
+        String creditosString = request.getParameter("creditos");
+        
+        int creditos = 0;
+        if (creditosString != null && !"".equals(creditosString)) {
+            creditos = Integer.parseInt(creditosString);
+        }
+
+        Curso curso = new Curso(nombre, codigo, creditos);
+
+        int registrosModificados = new CursoDao().insertar(curso);
+        this.accionDefault(request, response);
+    }
+
+    private void modificarCurso(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String codCurso = request.getParameter("codCurso");
+        String nombre = request.getParameter("nombre");
+        int creditos = 0;
+        String creditosString = request.getParameter("saldo");
+        if (creditosString != null && !"".equals(creditosString)) {
+            creditos = Integer.parseInt(creditosString);
+        }
+
+        Curso curso = new Curso(codCurso, nombre, creditos);
+        int registrosModificados = new CursoDao().actualizar(curso);
+        this.accionDefault(request, response);
+    }
+    
 }
