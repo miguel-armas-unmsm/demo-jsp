@@ -32,7 +32,7 @@
                         <!-- inicio: CABECERO-TABLA -->
                         <thead class="thead-dark">
                             <tr>
-                                <th>#</th>
+                                <th>Codigo</th>
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
                                 <th></th>
@@ -44,11 +44,11 @@
                             <c:forEach var="alumno" items="${alumnos}" varStatus="status">
                                 <!-- recorro el objeto alumnos pasado como parámetro -->
                                 <tr>
-                                    <td>${status.count}</td>
+                                    <td>${alumno.codAlumno}</td>
                                     <td>${alumno.nombre}</td>    
                                     <td>${alumno.apellido}</td>
                                     <td>
-                                        <a href="${pageContext.request.contextPath}/ServletControlador?accion=editar&codAlumno=${alumno.codAlumno}"
+                                        <a href="${pageContext.request.contextPath}/ServletControlador?accion=editarAlumno&codAlumno=${alumno.codAlumno}"
                                             class="btn btn-secondary">
                                             <i class="fas fa-angle-double-right"></i>Editar
                                         </a>

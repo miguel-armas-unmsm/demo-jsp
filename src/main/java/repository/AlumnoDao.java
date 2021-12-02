@@ -13,74 +13,25 @@ public class AlumnoDao {
     private List<Alumno> alumnos;
     
     public AlumnoDao() {
-        alumnos = new ArrayList<>();
-        
-        Alumno alumnoOne = new Alumno("A0001", "Miguel Rodrigo", "Armas Abt");
-        Alumno alumnoTwo = new Alumno("A0002", "Edinson Paolo", "Boada Cajo"); 
-        Alumno alumnoThree = new Alumno("A0003", "Yanpieer Josue", "Romero Salazar");
-        this.alumnos.add(alumnoOne);
-        this.alumnos.add(alumnoTwo);
-        this.alumnos.add(alumnoThree);
     }
+    
+    private static final String SQL_SELECT = "SELECT * FROM alumnos";           
 
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM alumnos WHERE codalu=?";
+            
+    private static final String SQL_INSERT = "INSERT INTO alumnos (codalu, nomalu, apealu) VALUES (?, ?, ?)";
+
+    private static final String SQL_UPDATE = "UPDATE alumnos SET nomalu=?, apealu=? WHERE codalu=?";
+    
+    private static final String SQL_DELETE = "DELETE FROM alumnos WHERE codalu=?";
+
+    
     public List<Alumno> listar() {
-        return this.alumnos;
-    }
-    
-    public Alumno encontrar(Alumno alumno) {
-        Alumno response = new Alumno();
-        for (Alumno a: this.alumnos) {
-            if(alumno.getCodAlumno()== a.getCodAlumno()) {
-                response = alumno; 
-            }
-        }
-        return response;
-    }
-    
-    public int insertar(Alumno alumno) {
-        this.alumnos.add(alumno);
-        return 1;
-    }
-    
-    public int actualizar(Alumno alumno) {
-        Alumno response = alumno;
-        
-        for(Alumno a: this.alumnos) {
-            if(a.getCodAlumno()== alumno.getCodAlumno()) {
-                this.alumnos.remove(a);
-            }
-        }
-        this.alumnos.add(response);
-        return 1;
-    }
-    
-    public int eliminar (Alumno alumno) {
-        this.alumnos.remove(alumno);
-        return 1;
-    }
-    
-    
-    private static final String SQL_SELECT = "SELECT idCliente, nombre, apellido, email, telefono, saldo"
-            + " FROM cliente";
-
-    private static final String SQL_SELECT_BY_ID = "SELECT idCliente, nombre, apellido, email, telefono, saldo"
-            + " FROM cliente WHERE idCliente= ?";
-
-    private static final String SQL_INSERT = "INSERT INTO cliente (nombre, apellido, email, telefono, saldo) "
-            + "VALUES (?, ?, ?, ?, ?)";
-
-    private static final String SQL_UPDATE = "UPDATE cliente "
-            + "SET nombre=?, apellido=?, email=?, telefono=?, saldo=? WHERE idCliente=?";
-    
-    private static final String SQL_DELETE = "DELETE FROM cliente WHERE idCliente= ?";
-
-    /*
-    public List<Cliente> listar() {
 
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        List<Cliente> alumnos = new ArrayList<>();
+        List<Alumno> alumnos = new ArrayList<>();
 
         try {
             con = Conexion.getConnection();
@@ -89,14 +40,11 @@ public class AlumnoDao {
 
             while (rs.next()) {
 
-                int idCliente = rs.getInt("idCliente");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                String email = rs.getString("email");
-                String telefono = rs.getString("telefono");
-                double saldo = rs.getDouble("saldo");
+                String codigo = rs.getString("codalu");
+                String nombre = rs.getString("nomalu");
+                String apellido = rs.getString("apealu");
 
-                Cliente ret = new Cliente(idCliente, nombre, apellido, email, telefono, saldo);
+                Alumno ret = new Alumno(codigo, nombre, apellido);
                 alumnos.add(ret);
             }
         } catch (SQLException ex) {
@@ -108,34 +56,29 @@ public class AlumnoDao {
             Conexion.close(con);
         }
         return alumnos;
+    }
 
-    public Cliente encontrar(Cliente cliente) {
+    public Alumno encontrar(Alumno alumno) {
 
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        try {
-
+        try {                       
             con = Conexion.getConnection();
             pstm = con.prepareStatement(SQL_SELECT_BY_ID);
 
             //proporciono el primer parámetro entero
-            pstm.setInt(1, cliente.getIdCliente());
-            rs = pstm.executeQuery();
+            pstm.setString(1, alumno.getCodAlumno());
+            rs = pstm.executeQuery();                        
+                   
+            while (rs.next()) {
 
-            //me posiciono en el registro devuelto, de haberlo
-            rs.absolute(1);
-            String nombre = rs.getString("nombre");
-            String apellido = rs.getString("apellido");
-            String email = rs.getString("email");
-            String telefono = rs.getString("telefono");
-            double saldo = rs.getDouble("saldo");
+                String nombre = rs.getString("nomalu");
+                String apellido = rs.getString("apealu");
 
-            cliente.setNombre(nombre);
-            cliente.setApellido(apellido);
-            cliente.setEmail(email);
-            cliente.setTelefono(telefono);
-            cliente.setSaldo(saldo);
+                alumno.setNombre(nombre);
+                alumno.setApellido(apellido);
+            }
 
         } catch (Exception ex) {
 
@@ -146,23 +89,20 @@ public class AlumnoDao {
             Conexion.close(pstm);
             Conexion.close(con);
         }
-        return cliente;
+        return alumno;
     }
 
-    public int insertar(Cliente cliente) {
+    public int insertar(Alumno alumno) {
         Connection con = null;
         PreparedStatement pstm = null;
         int rows=0;
         
-        try {
-
+        try {           
             con = Conexion.getConnection();
             pstm = con.prepareStatement(SQL_INSERT);
-            pstm.setString(1, cliente.getNombre());
-            pstm.setString(2, cliente.getApellido());
-            pstm.setString(3, cliente.getEmail());
-            pstm.setString(4, cliente.getTelefono());
-            pstm.setDouble(5, cliente.getSaldo());
+            pstm.setString(1, alumno.getCodAlumno());
+            pstm.setString(2, alumno.getNombre());
+            pstm.setString(3, alumno.getApellido());
             
             //filas afectadas
             rows=pstm.executeUpdate();
@@ -177,7 +117,7 @@ public class AlumnoDao {
         return rows;
     }
     
-    public int actualizar(Cliente cliente){
+    public int actualizar(Alumno alumno){
         Connection con = null;
         PreparedStatement pstm = null;
         int rows=0;
@@ -186,12 +126,9 @@ public class AlumnoDao {
 
             con = Conexion.getConnection();
             pstm = con.prepareStatement(SQL_UPDATE);
-            pstm.setString(1, cliente.getNombre());
-            pstm.setString(2, cliente.getApellido());
-            pstm.setString(3, cliente.getEmail());
-            pstm.setString(4, cliente.getTelefono());
-            pstm.setDouble(5, cliente.getSaldo());
-            pstm.setInt(6, cliente.getIdCliente());
+            pstm.setString(1, alumno.getNombre());
+            pstm.setString(2, alumno.getApellido());
+            pstm.setString(3, alumno.getCodAlumno());
             
             //filas afectadas
             rows=pstm.executeUpdate();
@@ -206,17 +143,16 @@ public class AlumnoDao {
         return rows;
     }
 
-    public int eliminar(Cliente cliente){
+    public int eliminar(Alumno alumno){
         
         Connection con = null;
         PreparedStatement pstm = null;
         int rows=0;
         
         try {
-
             con = Conexion.getConnection();
             pstm = con.prepareStatement(SQL_DELETE);
-            pstm.setInt(1, cliente.getIdCliente());
+            pstm.setString(1, alumno.getCodAlumno());
             
             //filas afectadas
             rows=pstm.executeUpdate();
@@ -230,5 +166,4 @@ public class AlumnoDao {
         }
         return rows;
     }
-*/
 }

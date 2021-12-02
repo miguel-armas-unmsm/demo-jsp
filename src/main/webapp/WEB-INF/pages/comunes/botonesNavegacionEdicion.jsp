@@ -29,7 +29,7 @@
                 
                 <!-- boton eliminar-alumno -->
                 <!-- ejecución a través de un link, doGet -->
-                <a href="${pageContext.request.contextPath}/ServletControlador?accion=eliminar&codAlumno=${alumno.codAlumno}"
+                <a href="${pageContext.request.contextPath}/ServletControlador?accion=eliminarAlumno&codAlumno=${alumno.codAlumno}"
                    class="btn btn-danger btn-block">
                     <i class="fas fa-trash"></i> Eliminar alumno
                 </a>

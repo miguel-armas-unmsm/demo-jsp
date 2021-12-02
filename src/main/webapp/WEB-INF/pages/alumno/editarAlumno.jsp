@@ -18,7 +18,7 @@
         <jsp:include page="/WEB-INF/pages/comunes/cabecero.jsp"></jsp:include>
 
         <!-- inicio: FORMULARIO -->
-        <form action="${pageContext.request.contextPath}/ServletControlador?accion=modificar&codAlumno=${alumno.codAlumno}"
+        <form action="${pageContext.request.contextPath}/ServletControlador?accion=modificarAlumno&codAlumno=${alumno.codAlumno}"
           method="POST" class="was-validated">
 
             <!-- botones de navegación de edicion -->
@@ -36,6 +36,12 @@
                                 </div>
                                 
                                 <!-- cuerpo de tarjeta -->
+                                <!-- codAlumno -->
+                                 <div class="form-group">
+                                     <label for="codAlumno">Codigo</label>
+                                     <input type="text" class="form-control" name="codAlumno" required value="${alumno.codAlumno}">
+                                 </div>
+                                
                                 <!-- nombre -->
                                  <div class="form-group">
                                      <label for="nombre">Nombre</label>

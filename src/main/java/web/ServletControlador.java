@@ -140,11 +140,12 @@ public class ServletControlador extends HttpServlet {
             throws ServletException, IOException {
 
         //recupero valores del formulario agregarAlumno
+        String codAlumno = request.getParameter("codAlumno");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");        
 
         //creo el objeto modelo alumno
-        Alumno alumno = new Alumno(nombre, apellido);
+        Alumno alumno = new Alumno(codAlumno, nombre, apellido);
 
         //inserto el nuevo objeto en la BD
         int registrosModificados = new AlumnoDao().insertar(alumno);

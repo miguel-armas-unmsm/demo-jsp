@@ -19,11 +19,17 @@
             </div>  <!-- fin: MODAL-HEADER -->
             
             <!-- inicio: FORMULARIO -->
-            <form action="${pageContext.request.contextPath}/ServletControlador?accion=insertar"
+            <form action="${pageContext.request.contextPath}/ServletControlador?accion=insertarAlumno"
                   method="POST" class="was-validated">
             
                 <!-- inicio: MODAL-BODY -->
                 <div class="modal-body">
+                    
+                    <!-- nombre -->
+                    <div class="form-group">
+                        <label for="codAlumno">Codigo</label>
+                        <input type="text" class="form-control" name="codAlumno" required>
+                    </div>
                     
                     <!-- nombre -->
                     <div class="form-group">
