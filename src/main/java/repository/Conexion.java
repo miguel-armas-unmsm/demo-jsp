@@ -9,6 +9,7 @@ public class Conexion {
     private static final String JDBC_URL = "jdbc:sqlserver://servidorsqlprueba.database.windows.net:1433;databaseName=sqlremoto;";
     private static final String JDBC_USER = "edinsonb";
     private static final String JDBC_PASSWORD = "aQ28zB4yL6Bkm5C";
+    private static final String JDBC_DRIVER_CLASS_NAME = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
     private static BasicDataSource dataSource;
 
@@ -19,6 +20,7 @@ public class Conexion {
             dataSource.setUrl(JDBC_URL);
             dataSource.setUsername(JDBC_USER);
             dataSource.setPassword(JDBC_PASSWORD);
+            dataSource.setDriverClassName(JDBC_DRIVER_CLASS_NAME);
             dataSource.setInitialSize(50);
         }
         return dataSource;
