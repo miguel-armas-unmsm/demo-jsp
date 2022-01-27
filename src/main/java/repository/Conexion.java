@@ -6,9 +6,9 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 public class Conexion {
 
-    private static final String JDBC_URL = "jdbc:sqlserver://servidorsqlprueba.database.windows.net:1433;databaseName=sqlremoto;";
-    private static final String JDBC_USER = "edinsonb";
-    private static final String JDBC_PASSWORD = "aQ28zB4yL6Bkm5C";
+    private static final String JDBC_URL = "jdbc:sqlserver://unmsmserver.database.windows.net:1433;databaseName=unmsmdatabase";
+    private static final String JDBC_USER = "miguelarmas";
+    private static final String JDBC_PASSWORD = "l21m01j16M01L13";
     private static final String JDBC_DRIVER_CLASS_NAME = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
     private static BasicDataSource dataSource;
